@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Vidaloka&display=swap" rel="stylesheet">
+
+</head>
+<body font-family: ‘Roboto’, sans-serif;>
+  <header class='nav justify-content-center'>
+  <h1 class='title'><a href='/'>The Art of Coding</a></h1>
+  </header>
+
+    <nav class="nav nav-pills flex-column flex-sm-row">
+      <a class="flex-sm-fill text-sm-centernav-link" href="{% url 'author_list' %}">Authors</a>
+      <a class="flex-sm-fill text-sm-centernav-link" href="{% url 'blog_list' %}">Blog Posts</a>
+      <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'author_form' %}">Add A New Author</a>
+        {% if user.is_authenticated %} Welcome, {{ user.username }}
+        <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'logout' %}">Log out</a>
+        {% else %}
+        <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'login' %}">Login</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+
+      <!-- <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="nav-item nav-link active" type="submit">Search</button>
+      </form> -->
+  
+    </nav>
+    {% block content %} {% endblock %}
+  </body>
+</html>

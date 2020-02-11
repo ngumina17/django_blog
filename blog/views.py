@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Author, Blog
 from .forms import AuthorForm, BlogForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -24,12 +25,12 @@ def blog_list(request):
     blog = Blog.objects.all()
     return render(request, 'blog/blog_list.html', {'blog': blog})
 
-
+@login_required
 def blog_delete(request, pk):
     Blog.objects.get(id=pk).delete()
     return redirect('blog_list')
 
-
+@login_required
 def author_form(request):
     if request.method == 'POST':
         form = AuthorForm(request.POST)
@@ -40,7 +41,8 @@ def author_form(request):
         form = AuthorForm()
     return render(request, 'blog/author_form.html', {'form': form})
 
-def blog_form(request):
+@login_required
+def blog_form(request, pk):
     if request.method == 'POST':
         form = BlogForm(request.POST)
         if form.is_valid():
@@ -50,6 +52,7 @@ def blog_form(request):
         form = BlogForm()
     return render(request, 'blog/blog_form.html', {'form': form})
 
+@login_required
 def blog_edit(request, pk):
     blog = Blog.objects.get(pk=pk)
     if request.method == "POST":
@@ -61,6 +64,7 @@ def blog_edit(request, pk):
         form = BlogForm(instance=blog)
     return render(request, 'blog/blog_form.html', {'form': form})
 
+@login_required
 def author_edit(request, pk):
     author = Author.objects.get(pk=pk)
     if request.method == "POST":
@@ -71,3 +75,7 @@ def author_edit(request, pk):
     else:
         form = AuthorForm(instance=author)
     return render(request, 'blog/author_form.html', {'form': form})
+
+# def search_form(request, info):
+#     author = Author.objects.filter(name__search=info)
+#     return render(request, 'blog/author_list.html', {'author': author})

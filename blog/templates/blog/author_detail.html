@@ -1,7 +1,9 @@
+{% extends 'blog/base.html' %} {% block content %}
 <h2>{{ author.name }}</h2>
 <img src="{{ author.photo_url }}" alt="" class="author-photo" />
 <h3>{{ author.location }}</h3>
-<a href="{% url 'author_edit' pk=author.pk %}">Update Info</a>
+<button type="button" class="btn btn-info"><a href="{% url 'author_edit' pk=author.pk %}">Update Info</a></button>
+<button type="button" class="btn btn-info"><a href="{% url 'blog_form' pk=author.pk %}">Add a new blog post</a></button>
 <ul>
     {% for blog in author.blogs.all %}
     <li>
@@ -11,3 +13,4 @@
     </li>
     {% endfor %}
   </ul>
+{% endblock %}

@@ -10,3 +10,6 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('title', 'author', 'content', 'photo_url',)
+
+class SearchBar(forms.Form):
+        fields = ('search')
