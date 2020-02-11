@@ -1,0 +1,7 @@
+<h1>{{ blog.title }}</h1>
+<h2>{{ blog.author }}</h2>
+<img src="{{ blog.photo_url }}" alt="" class="blog-photo" />
+<h4>{{ blog.content }}</h4>
+<a href="{% url 'blog_delete' pk=blog.pk %}">DELETE</a>
+<a href="{% url 'blog_edit' pk=blog.pk %}">Update</a>
+

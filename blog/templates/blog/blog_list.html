@@ -1,0 +1,8 @@
+<h2>Blog Posts</h2>
+<ul>
+    {% for blog in blog %}
+    <li>
+        <a href="{% url 'blog_detail' pk=blog.pk %}">{{ blog.title }}</a>
+    </li>
+    {% endfor %}
+</ul>

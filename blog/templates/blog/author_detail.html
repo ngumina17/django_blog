@@ -1,0 +1,13 @@
+<h2>{{ author.name }}</h2>
+<img src="{{ author.photo_url }}" alt="" class="author-photo" />
+<h3>{{ author.location }}</h3>
+<a href="{% url 'author_edit' pk=author.pk %}">Update Info</a>
+<ul>
+    {% for blog in author.blogs.all %}
+    <li>
+      <a href="{% url 'blog_detail' pk=blog.pk %}"
+        >{{ blog.title }}</a
+      >
+    </li>
+    {% endfor %}
+  </ul>
