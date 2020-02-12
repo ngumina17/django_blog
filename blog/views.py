@@ -43,13 +43,14 @@ def author_form(request):
 
 @login_required
 def blog_form(request, pk):
+    author = Author.objects.get(id=pk)
     if request.method == 'POST':
         form = BlogForm(request.POST)
         if form.is_valid():
             blog = form.save()
             return redirect('blog_detail', pk=blog.pk)
     else:
-        form = BlogForm()
+        form = BlogForm(initial={'author' : author})
     return render(request, 'blog/blog_form.html', {'form': form})
 
 @login_required

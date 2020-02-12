@@ -3,6 +3,11 @@
 <h2>By: {{ blog.author }}</h2>
 <img src="{{ blog.photo_url }}" alt="" class="blog-photo" />
 <h4>{{ blog.content }}</h4>
-<button type="button" class="btn btn-danger"><a href="{% url 'blog_delete' pk=blog.pk %}">Delete</a></button>
-<button type= "button" class="btn btn-info"><a href="{% url 'blog_edit' pk=blog.pk %}">Update</a></button>
+<button type="button" class="btn btn-danger">
+  <a href="{% url 'blog_delete' pk=blog.pk %}">Delete</a>
+</button>
+<button type="button" class="btn btn-info">
+  <a href="{% url 'blog_edit' pk=blog.pk %}">Update</a>
+</button>
+<a href="{% url 'author_detail' pk=blog.author.id %}">Back to Author</a>
 {% endblock %}
